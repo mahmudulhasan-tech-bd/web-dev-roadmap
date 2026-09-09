@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>180 Days Web Development Roadmap</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #0f172a; color: #f8fafc; text-align: center; padding-bottom: 50px; }
+    
+    header {
+      background-color: #1e293b;
+      color: #38bdf8;
+      padding: 20px;
+      border-bottom: 2px solid #334155;
+    }
+    header h1 { font-size: 24px; margin-bottom: 5px; }
+
+    .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+
+    /* Date Section */
+    .date-section {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .date-section label { font-size: 16px; color: #cbd5e1; }
+    .date-section input {
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: 1px solid #475569;
+      background-color: #0f172a;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    /* Progress Bar */
+    .progress-info { font-size: 20px; font-weight: bold; margin-bottom: 10px; color: #38bdf8; }
+    .progress-bar-bg {
+      width: 100%;
+      background-color: #334155;
+      border-radius: 20px;
+      height: 22px;
+      overflow: hidden;
+      margin-bottom: 35px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+      transition: width 0.4s ease;
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 15px;
+    }
+
+    .day-card {
+      background-color: #1e293b;
+      border: 2px solid #38bdf8;
+      color: #38bdf8;
+      padding: 12px 8px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .day-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+    }
+
+    .day-card.completed {
+      background-color: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+
+    .card-date { font-size: 11px; color: #38bdf8; margin-top: 2px; }
+    .day-card.completed .card-date { color: #e2e8f0; }
+    .task-status { font-size: 11px; font-weight: normal; color: #94a3b8; }
+    .day-card.completed .task-status { color: #e2e8f0; }
+
+    /* Modal / Pop-up Window */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 550px;
+      width: 90%;
+      text-align: left;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .modal-content h3 { color: #38bdf8; margin-bottom: 5px; }
+    .modal-target-date { font-size: 13px; color: #cbd5e1; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+    
+    .checklist { list-style: none; padding: 0; margin-bottom: 20px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #334155;
+      color: #e2e8f0;
+    }
+    .checklist input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      cursor: pointer;
+      accent-color: #38bdf8;
+    }
+
+    .task-label-box { display: flex; flex-direction: column; }
+    .task-title { font-size: 15px; }
+    .task-time-stamp { font-size: 11px; color: #4ade80; margin-top: 3px; }
+
+    .modal-btn-group { display: flex; justify-content: flex-end; }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #38bdf8;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🚀 180 Days Full-Stack Web Development Roadmap</h1>
+    <p>HTML/CSS → JS → React → Node/Express → SQL/MongoDB → Live Projects</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Start Date Section -->
+    <div class="date-section">
+      <label for="start-date">📅 শুরু করার তারিখ:</label>
+      <input type="date" id="start-date">
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-info">
+      সর্বমোট সম্পন্ন হয়েছে: <span id="completed-count">0</span>/180 দিন
+    </div>
+    
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+
+    <!-- Days Grid -->
+    <div class="grid" id="days-container"></div>
+  </div>
+
+  <!-- Modal Task Details -->
+  <div class="modal" id="task-modal">
+    <div class="modal-content">
+      <h3 id="modal-title">Day Title</h3>
+      <div class="modal-target-date" id="modal-target-date">📅 নির্ধারিত তারিখ: --</div>
+      <ul class="checklist" id="modal-tasks"></ul>
+      <div class="modal-btn-group">
+        <button class="btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const totalDays = 180;
+
+    // Generates topics phase-by-phase for 180 days
+    function getTaskData(day) {
+      if (day <= 30) {
+        return {
+          title: `Day ${day} — Phase 1: HTML5 & CSS3 Fundamentals`,
+          tasks: ["HTML Tags, Forms, Links & Media", "CSS Selectors, Colors, Fonts & Box Model", "Flexbox & CSS Grid Layout Practice", "Responsive Web Design & Media Queries", "একটি পোর্টফোলিও স্ট্যাটিক ডিজাইন তৈরি করো"]
+        };
+      } else if (day <= 75) {
+        return {
+          title: `Day ${day} — Phase 2: JavaScript & ES6+`,
+          tasks: ["Variables, Data Types, Conditionals & Loops", "Functions, Array Methods & Object Operations", "DOM Manipulation & Event Listeners", "Fetch API & Async/Await Concept", "একটি To-Do List অ্যাপ তৈরি করো (LocalStorage সহ)"]
+        };
+      } else if (day <= 115) {
+        return {
+          title: `Day ${day} — Phase 3: Frontend Framework (React.js)`,
+          tasks: ["React Components, JSX & Props", "useState, useEffect Hooks", "React Router (Multi-page App)", "Shopping Cart Logic Design", "একটি সম্পূর্ণ e-Commerce UI (ShoppingFaire UI) বানাও"]
+        };
+      } else if (day <= 150) {
+        return {
+          title: `Day ${day} — Phase 4: Backend & Database (Node.js, Express & SQL/MongoDB)`,
+          tasks: ["Node.js & Express.js Server Setup", "RESTful API Routes (GET, POST, PUT, DELETE)", "SQL / MongoDB Schema & Database Integration", "User Authentication (JWT & Password Hashing)", "পেমেন্ট অথবা শপিং সার্ভার ব্যাকএন্ড রেডি করো"]
+        };
+      } else {
+        return {
+          title: `Day ${day} — Phase 5: Advanced Real-time & Live Projects`,
+          tasks: ["Google Maps API / Location Integration", "Socket.io (Live Real-time Tracking Concept)", "Full-stack Integration (Frontend + Backend)", "Bug Fixing, Performance Optimization", "ShoppingFaire & Bus Tracking App Live Server-এ Host করো"]
+        };
+      }
+    }
+
+    const daysContainer = document.getElementById('days-container');
+    const completedCountEl = document.getElementById('completed-count');
+    const progressFill = document.getElementById('progress-fill');
+    const startDateInput = document.getElementById('start-date');
+
+    const modal = document.getElementById('task-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalTargetDate = document.getElementById('modal-target-date');
+    const modalTasks = document.getElementById('modal-tasks');
+
+    let completedTasks = JSON.parse(localStorage.getItem('webdev_tasks_completed')) || {};
+    let savedStartDate = localStorage.getItem('webdev_start_date') || '';
+
+    if (savedStartDate) startDateInput.value = savedStartDate;
+
+    startDateInput.addEventListener('change', (e) => {
+      localStorage.setItem('webdev_start_date', e.target.value);
+      renderCards();
+    });
+
+    function getCalculatedDate(dayNumber) {
+      const baseDateStr = startDateInput.value;
+      if (!baseDateStr) return null;
+
+      const date = new Date(baseDateStr);
+      date.setDate(date.getDate() + (dayNumber - 1));
+      
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      
+      return `${day}/${month}/${year}`;
+    }
+
+    function isDayComplete(day) {
+      const taskData = getTaskData(day);
+      const total = taskData.tasks.length;
+      const done = completedTasks[day] ? Object.keys(completedTasks[day]).length : 0;
+      return total > 0 && total === done;
+    }
+
+    function updateProgress() {
+      let completedDaysCount = 0;
+      for (let i = 1; i <= totalDays; i++) {
+        if (isDayComplete(i)) completedDaysCount++;
+      }
+
+      completedCountEl.textContent = completedDaysCount;
+      const percentage = (completedDaysCount / totalDays) * 100;
+      progressFill.style.width = percentage + '%';
+      
+      localStorage.setItem('webdev_tasks_completed', JSON.stringify(completedTasks));
+    }
+
+    function renderCards() {
+      daysContainer.innerHTML = '';
+      for (let i = 1; i <= totalDays; i++) {
+        const card = document.createElement('div');
+        card.classList.add('day-card');
+
+        const taskData = getTaskData(i);
+        const total = taskData.tasks.length;
+        const done = completedTasks[i] ? Object.keys(completedTasks[i]).length : 0;
+        const targetDate = getCalculatedDate(i);
+
+        if (isDayComplete(i)) card.classList.add('completed');
+
+        card.innerHTML = `
+          <span>Day ${i}</span>
+          ${targetDate ? `<span class="card-date">📅 ${targetDate}</span>` : ''}
+          <span class="task-status">${done}/${total} Done</span>
+        `;
+
+        card.addEventListener('click', () => openModal(i));
+        daysContainer.appendChild(card);
+      }
+    }
+
+    function openModal(day) {
+      const data = getTaskData(day);
+      modalTitle.textContent = data.title;
+      
+      const targetDate = getCalculatedDate(day);
+      modalTargetDate.textContent = targetDate ? `📅 নির্ধারিত তারিখ: ${targetDate}` : '📅 নির্ধারিত তারিখ: (শুরুর তারিখ সিলেক্ট করুন)';
+
+      modalTasks.innerHTML = '';
+
+      if (!completedTasks[day]) completedTasks[day] = {};
+
+      data.tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `web-task-${day}-${index}`;
+        
+        const isChecked = completedTasks[day][index] ? true : false;
+        checkbox.checked = isChecked;
+
+        const labelBox = document.createElement('div');
+        labelBox.classList.add('task-label-box');
+
+        const label = document.createElement('label');
+        label.htmlFor = `web-task-${day}-${index}`;
+        label.classList.add('task-title');
+        label.textContent = task;
+        label.style.cursor = 'pointer';
+
+        labelBox.appendChild(label);
+
+        if (isChecked && completedTasks[day][index]) {
+          const timeStamp = document.createElement('span');
+          timeStamp.classList.add('task-time-stamp');
+          timeStamp.textContent = `✓ সম্পন্ন: ${completedTasks[day][index]}`;
+          labelBox.appendChild(timeStamp);
+        }
+
+        checkbox.addEventListener('change', (e) => {
+          if (!startDateInput.value) {
+            const today = new Date().toISOString().split('T')[0];
+            startDateInput.value = today;
+            localStorage.setItem('webdev_start_date', today);
+          }
+
+          if (e.target.checked) {
+            const now = new Date();
+            const timeStr = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()} - ${now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+            completedTasks[day][index] = timeStr;
+          } else {
+            delete completedTasks[day][index];
+          }
+
+          updateProgress();
+          renderCards();
+          openModal(day);
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(labelBox);
+        modalTasks.appendChild(li);
+      });
+
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) closeModal();
+    }
+
+    renderCards();
+    updateProgress();
+  </script>
+</body>
+</html>

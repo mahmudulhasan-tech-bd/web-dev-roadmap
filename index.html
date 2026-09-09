@@ -196,32 +196,56 @@
   <script>
     const totalDays = 180;
 
-    // Generates topics phase-by-phase for 180 days
     function getTaskData(day) {
       if (day <= 30) {
         return {
           title: `Day ${day} — Phase 1: HTML5 & CSS3 Fundamentals`,
-          tasks: ["HTML Tags, Forms, Links & Media", "CSS Selectors, Colors, Fonts & Box Model", "Flexbox & CSS Grid Layout Practice", "Responsive Web Design & Media Queries", "একটি পোর্টফোলিও স্ট্যাটিক ডিজাইন তৈরি করো"]
+          tasks: [
+            "HTML/CSS মূল কনসেপ্ট ও থিওরি পড়া",
+            "💻 Practice Challenge: শেখা কনসেপ্ট দিয়ে একটি ছোট লেআউট কোড করো",
+            "ডিজাইন রেসপন্সিভ (Mobile-friendly) হয়েছে কিনা ব্রাউজারে ইনস্পেক্ট করো",
+            "GitHub-এ আজকের প্র্যাকটিস কোড Commit ও Push করো"
+          ]
         };
       } else if (day <= 75) {
         return {
           title: `Day ${day} — Phase 2: JavaScript & ES6+`,
-          tasks: ["Variables, Data Types, Conditionals & Loops", "Functions, Array Methods & Object Operations", "DOM Manipulation & Event Listeners", "Fetch API & Async/Await Concept", "একটি To-Do List অ্যাপ তৈরি করো (LocalStorage সহ)"]
+          tasks: [
+            "JavaScript লজিক ও মেথড রিভিশন/পড়া",
+            "💻 Practice Challenge: আজকের কনসেপ্ট দিয়ে ১টি প্রবলেম সলভ বা ফাংশন লেখো",
+            "Console-এ কোডের আউটপুট বা এরর চেক ও ফিক্স করো",
+            "GitHub-এ প্র্যাকটিস ফাইল আপডেট করো"
+          ]
         };
       } else if (day <= 115) {
         return {
           title: `Day ${day} — Phase 3: Frontend Framework (React.js)`,
-          tasks: ["React Components, JSX & Props", "useState, useEffect Hooks", "React Router (Multi-page App)", "Shopping Cart Logic Design", "একটি সম্পূর্ণ e-Commerce UI (ShoppingFaire UI) বানাও"]
+          tasks: [
+            "React Component & State কনসেপ্ট পড়া",
+            "💻 Practice Challenge: ShoppingFaire অ্যাপের ১টি নির্দিষ্ট ইউজার ইন্টারফেস/কম্পোনেন্ট কোড করো",
+            "State & Props ঠিকমতো কাজ করছে কিনা ব্রাউজারে চেক করো",
+            "GitHub-এ React প্রজেক্ট কোড Push করো"
+          ]
         };
       } else if (day <= 150) {
         return {
-          title: `Day ${day} — Phase 4: Backend & Database (Node.js, Express & SQL/MongoDB)`,
-          tasks: ["Node.js & Express.js Server Setup", "RESTful API Routes (GET, POST, PUT, DELETE)", "SQL / MongoDB Schema & Database Integration", "User Authentication (JWT & Password Hashing)", "পেমেন্ট অথবা শপিং সার্ভার ব্যাকএন্ড রেডি করো"]
+          title: `Day ${day} — Phase 4: Backend & Database (Node/Express & SQL/MongoDB)`,
+          tasks: [
+            "Node/Express বা Database কনসেপ্ট পড়া",
+            "💻 Practice Challenge: Postman বা Thunder Client দিয়ে ১টি REST API এন্ডপয়েন্ট টেস্ট করো",
+            "ডাটাবেজে ডাটা সঠিকভাবে Save ও Fetch হচ্ছে কিনা যাচাই করো",
+            "GitHub-এ ব্যাকএন্ড ফাইল Push করো"
+          ]
         };
       } else {
         return {
-          title: `Day ${day} — Phase 5: Advanced Real-time & Live Projects`,
-          tasks: ["Google Maps API / Location Integration", "Socket.io (Live Real-time Tracking Concept)", "Full-stack Integration (Frontend + Backend)", "Bug Fixing, Performance Optimization", "ShoppingFaire & Bus Tracking App Live Server-এ Host করো"]
+          title: `Day ${day} — Phase 5: Real-time & Advanced Projects`,
+          tasks: [
+            "Socket.io / Google Maps API কনসেপ্ট রিভিশন",
+            "💻 Practice Challenge: Bus Tracking অ্যাপের রিয়েল-টাইম ফিচার বা শপিং সাইটের পেমেন্ট ফ্লো টেস্ট করো",
+            "Frontend ও Backend-এর ফুল-স্ট্যাক কানেকশন চেক করো",
+            "Live Server (Render/Vercel)-এ আপডেট টেস্ট করো"
+          ]
         };
       }
     }
